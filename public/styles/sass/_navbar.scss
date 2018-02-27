@@ -1,0 +1,25 @@
+$color1: #4A6D72;
+$color2: #00BCD4;
+
+ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+}
+
+li {
+    padding: 1rem 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-family: 'Helvetica Neue', Helvetica, arial, sans-serif;
+    color: $color1;
+    border-bottom: solid 3px transparent;
+    &.active {
+        color: $color2;
+        border-color: $color2;
+    }
+}
