@@ -23,8 +23,10 @@ app.get('/', (req, res, next) => {
 pages.forEach((page) => {
   if (page.substr(page.length - 3) === 'pug' && page !== 'index.pug') {
     page = page.slice(0, -4);
-
-    const frontMatter = yamlFront.loadFront(`content/${page}.md`);
+    let frontMatter = {};
+    if (fs.existsSync(`content/${page}.md`)) {
+      frontMatter = yamlFront.loadFront(`content/${page}.md`);
+    }
     app.get(`/${page}.html`, (req, res, next) => {
       res.render(page, frontMatter);
     });
