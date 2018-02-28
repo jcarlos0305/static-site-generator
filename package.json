@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \" nodemon app.js \"  \" node-sass ./public/styles/sass/main.scss ./public/styles/main.css -w \" ",
+    "start": "concurrently \" nodemon -e js,md app.js \"  \" node-sass ./public/styles/sass/main.scss ./public/styles/main.css -w \" ",
     "prestart": "node-sass ./public/styles/sass/main.scss ./public/styles/main.css && postcss './public/styles/main.css' -o './public/styles/main.css' --use autoprefixer ",
     "build": "node build.js "
   },
@@ -36,6 +36,7 @@
     "marked": "^0.3.16",
     "nodemon": "^1.15.1",
     "path": "^0.12.7",
-    "postcss-cli": "^5.0.0"
+    "postcss-cli": "^5.0.0",
+    "reload": "^2.2.2"
   }
 }
