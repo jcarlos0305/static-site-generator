@@ -1,8 +1,10 @@
 const express = require('express');
+var http = require('http')
 const path = require('path');
 const bodyParser = require('body-parser');
 const yamlFront = require('yaml-front-matter');
 const fs = require('fs');
+var reload = require('reload')
 
 const app = express();
 const indexFrontMatter = yamlFront.loadFront('content/index.md');
@@ -20,6 +22,10 @@ app.get('/', (req, res, next) => {
   res.render('index', indexFrontMatter);
 });
 
+app.get('/index.html', (req, res, next) => {
+  res.render('index', indexFrontMatter);
+});
+
 pages.forEach((page) => {
   if (page.substr(page.length - 3) === 'pug' && page !== 'index.pug') {
     page = page.slice(0, -4);
@@ -31,6 +37,10 @@ pages.forEach((page) => {
   }
 });
 
-app.listen(3001, () => {
+var server = http.createServer(app)
+
+reload(app);
+
+server.listen(3001, () => {
   console.log('we are listening on port 3001');
 });
