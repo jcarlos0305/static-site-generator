@@ -1,13 +1,12 @@
 const express = require('express');
-var http = require('http')
+const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
 const yamlFront = require('yaml-front-matter');
 const fs = require('fs');
-var reload = require('reload')
+const reload = require('reload');
 
 const app = express();
-const indexFrontMatter = yamlFront.loadFront('content/index.md');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -18,28 +17,34 @@ app.use('/static', express.static('public'));
 
 const pages = fs.readdirSync(app.get('views'));
 
-app.get('/', (req, res, next) => {
-  res.render('index', indexFrontMatter);
-});
-
-app.get('/index.html', (req, res, next) => {
-  res.render('index', indexFrontMatter);
-});
-
+let navigation = '---\npages: [';
 pages.forEach((page) => {
-  if (page.substr(page.length - 3) === 'pug' && page !== 'index.pug') {
-    page = page.slice(0, -4);
-    let frontMatter = {};
-    if (fs.existsSync(`content/${page}.md`)) {
-      frontMatter = yamlFront.loadFront(`content/${page}.md`);
+  if (page.substr(page.length - 3) === 'pug') {
+    const pageName = page.slice(0, -4);
+    navigation += `{url: '${pageName}.html', name: '${pageName === 'index' ? ('Home') : (pageName.substr(0, 1).toUpperCase() + pageName.substr(1))}'}, `;
+    let frontMatter = yamlFront.loadFront('content/navigation.yml');
+    if (fs.existsSync(`content/${pageName}.md`)) {
+      frontMatter = Object.assign(frontMatter, yamlFront.loadFront(`content/${pageName}.md`));
     }
-    app.get(`/${page}.html`, (req, res, next) => {
-      res.render(page, frontMatter);
+    if (pageName === 'index') {
+      app.get('/', (req, res, next) => {
+        res.render(pageName, frontMatter);
+      });
+
+      app.get(`/${pageName}.html`, (req, res, next) => {
+        res.render(pageName, frontMatter);
+      });
+    }
+    app.get(`/${pageName}.html`, (req, res, next) => {
+      res.render(pageName, frontMatter);
     });
   }
 });
+navigation = navigation.slice(0, -2);
+navigation += ']\n---';
+fs.writeFileSync('content/navigation.yml', navigation);
 
-var server = http.createServer(app)
+const server = http.createServer(app);
 
 reload(app);
 

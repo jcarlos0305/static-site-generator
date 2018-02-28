@@ -1,0 +1,3 @@
+---
+pages: [{url: 'example.html', name: 'Example'}, {url: 'index.html', name: 'Home'}, {url: 'juandi.html', name: 'Juandi'}]
+---

@@ -23,9 +23,9 @@ const fileTree = fs.readdirSync('./views');
 fileTree.forEach((file) => {
   if (file.substr(file.length - 4) === '.pug') {
     const filename = file.slice(0, -4);
-    let frontMatter = {};
+    let frontMatter = yamlFront.loadFront('content/navigation.yml');
     if (fs.existsSync(`./content/${filename}.md`)) {
-      frontMatter = yamlFront.loadFront(`./content/${filename}.md`);
+      frontMatter = Object.assign(frontMatter, yamlFront.loadFront(`./content/${filename}.md`));
     }
     const compiledFunction = pug.compileFile(`views/${filename}.pug`);
     const html = compiledFunction(frontMatter);

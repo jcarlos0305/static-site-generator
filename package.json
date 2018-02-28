@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \" nodemon -e js,md app.js \"  \" node-sass ./public/styles/sass/main.scss ./public/styles/main.css -w \" ",
+    "start": "concurrently \" nodemon -e js,md,pug,css app.js \"  \" node-sass ./public/styles/sass/main.scss ./public/styles/main.css -w \" ",
     "prestart": "node-sass ./public/styles/sass/main.scss ./public/styles/main.css && postcss './public/styles/main.css' -o './public/styles/main.css' --use autoprefixer ",
     "build": "node build.js "
   },
@@ -19,7 +19,8 @@
     "js-beautify": "^1.7.5",
     "node-sass": "^4.7.2",
     "pug": "^2.0.0-rc.4",
-    "yaml-front-matter": "^3.4.0"
+    "yaml-front-matter": "^3.4.0",
+    "reload": "^2.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.0.0",
@@ -36,7 +37,6 @@
     "marked": "^0.3.16",
     "nodemon": "^1.15.1",
     "path": "^0.12.7",
-    "postcss-cli": "^5.0.0",
-    "reload": "^2.2.2"
+    "postcss-cli": "^5.0.0"
   }
 }

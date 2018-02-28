@@ -1,16 +1,10 @@
-mixin navLink(link, name)
+mixin navLink(link, n)
     li
         a(
             href=link
-            class={active: name === current}
-        ) #{name}
-
-block navbar
+            class={active: n === current}
+        ) #{n}
+navbar
     ul
-        +navLink('./index.html', 'Home')
-        +navLink('./about.html', 'About')
-        +navLink('./example.html', 'Example')
-        +navLink('./mari.html', 'Mari')
-
-
-    
+        each val in pages
+            +navLink(val.url, val.name)
