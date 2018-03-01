@@ -29,6 +29,8 @@ fileTree.forEach((file) => {
     }
     const compiledFunction = pug.compileFile(`views/${filename}.pug`);
     const html = compiledFunction(frontMatter);
-    fs.writeFileSync(`./dist/${filename}.html`, beautifyHtml(html, { indent_size: 4 }));
+    fs.writeFileSync(`./dist/${filename}.html`, beautifyHtml(html, {
+      indent_size: 4,
+    }));
   }
 });
