@@ -1,11 +1,16 @@
 extends shared/layout
 
 block content
-	h1 Welcome to the static site builder!
-	p This tool helps in the creation of websites, it uses NodeJs as a backend with Express, and to work the frontend it works with Pug Template Engine.
+	div.main-content
+		h1 Welcome to the static site builder!
+		p This tool helps in the creation of websites, it uses NodeJs as a backend with Express, and to work the frontend it works with Pug Template Engine.
 
-	h2 Instructions
-	p When you create your app
-	img.(src="/static/img/folder.png" alt="Folder Title")
-	p The views of the application are stores in the views folder, you will find there this index and an example of a blog website.
+		h2 Instructions
+		p When you create your website, you will get this folder structure.
+		img(src="/static/img/folder.png" alt="Folder Title")
+
+		p The views of the application are stored in the views folder, you will find there this index and an example of a blog website.
+		p To start working on the website you can create/edit the files in the views folder.
+		p To add custom styles or images, there is a public folder where you can store your images or edit the scss files to add your custom styles.
+
 	

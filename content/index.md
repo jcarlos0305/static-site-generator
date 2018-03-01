@@ -1,4 +1,4 @@
 ---
-title: Static siteS
+title: Static sites
 template: index.pug
 ---
