@@ -2,9 +2,8 @@ mixin navLink(link, n)
     li
         a(
             href=link
-            class={active: n === current}
         ) #{n}
-navbar
+navbar#navbar
     ul
         each val in pages
             +navLink(val.url, val.name)

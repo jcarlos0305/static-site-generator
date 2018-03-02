@@ -1,5 +1,12 @@
 extends layouts/home
 
 block content
-	div.container
-		h1 Welcome to the static site builder!
+  header#first(style="background-image: url('static/img/home.jpg')")
+    include partials/_navbar
+    div.header-content
+      .inner
+        h1 Welcome
+        br
+        br  
+        h5 Made by
+        h3 Juan Carlos Sánchez Guzmán
