@@ -1,3 +1,6 @@
+body {
+  margin: 0; }
+
 header {
   position: relative;
   min-height: auto;
@@ -15,7 +18,7 @@ header {
 header .header-content {
   position: relative;
   width: 100%;
-  padding: 100px 15px;
+  padding: 100px 0;
   text-align: center;
   z-index: 2;
   top: 25%; }
@@ -36,7 +39,8 @@ ul {
   display: flex;
   justify-content: flex-end;
   background-color: transparent;
-  list-style: none; }
+  list-style: none;
+  margin-top: 0; }
 
 li {
   padding: 1rem 1.5rem; }
