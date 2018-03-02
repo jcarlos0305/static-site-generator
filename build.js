@@ -23,10 +23,8 @@ const fileTree = fs.readdirSync('./views');
 fileTree.forEach((file) => {
   if (file.substr(file.length - 4) === '.pug') {
     const filename = file.slice(0, -4);
-    let frontMatter = yamlFront.loadFront('content/navigation.yml');
-    if (fs.existsSync(`./content/${filename}.md`)) {
-      frontMatter = Object.assign(frontMatter, yamlFront.loadFront(`./content/${filename}.md`));
-    }
+    let frontMatter = yamlFront.loadFront('options/bootstrap.yml');
+    frontMatter = Object.assign(frontMatter, yamlFront.loadFront('options/navigation.yml'));
     const compiledFunction = pug.compileFile(`views/${filename}.pug`);
     const html = compiledFunction(frontMatter);
     fs.writeFileSync(`./dist/${filename}.html`, beautifyHtml(html, {
@@ -34,3 +32,5 @@ fileTree.forEach((file) => {
     }));
   }
 });
+
+console.log('\nDone!');

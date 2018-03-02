@@ -22,27 +22,25 @@ pages.forEach((page) => {
   if (page.substr(page.length - 3) === 'pug') {
     const pageName = page.slice(0, -4);
     navigation += `{url: '${pageName}.html', name: '${pageName === 'index' ? ('Home') : (pageName.substr(0, 1).toUpperCase() + pageName.substr(1))}'}, `;
-    let frontMatter = yamlFront.loadFront('content/navigation.yml');
-    if (fs.existsSync(`content/${pageName}.md`)) {
-      frontMatter = Object.assign(frontMatter, yamlFront.loadFront(`content/${pageName}.md`));
-    }
+    let frontMatter = yamlFront.loadFront('options/bootstrap.yml');
+    frontMatter = Object.assign(frontMatter, yamlFront.loadFront('options/navigation.yml'));
     if (pageName === 'index') {
-      app.get('/', (req, res, next) => {
+      app.get('/', (req, res) => {
         res.render(pageName, frontMatter);
       });
 
-      app.get(`/${pageName}.html`, (req, res, next) => {
+      app.get(`/${pageName}.html`, (req, res) => {
         res.render(pageName, frontMatter);
       });
     }
-    app.get(`/${pageName}.html`, (req, res, next) => {
+    app.get(`/${pageName}.html`, (req, res) => {
       res.render(pageName, frontMatter);
     });
   }
 });
 navigation = navigation.slice(0, -2);
 navigation += ']\n---';
-fs.writeFileSync('content/navigation.yml', navigation);
+fs.writeFileSync('options/navigation.yml', navigation);
 
 const server = http.createServer(app);
 
